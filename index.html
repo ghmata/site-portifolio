@@ -4,722 +4,1004 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gabriel Hipólito — Desenvolvedor Fullstack & IA</title>
     <meta name="description"
-        content="Gabriel Hipólito - Desenvolvedor Fullstack & Especialista em Automação. Transformo processos manuais em sistemas inteligentes.">
-    <title>Gabriel Hipólito | Desenvolvedor Fullstack & Especialista em Automação</title>
+        content="Automação, Gestão e Inteligência Artificial. Soluções de software sob medida para empresas que querem escalar.">
 
-    <!-- Google Fonts -->
+    <!-- Preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- Tailwind CSS -->
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Alpine.js -->
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-
-    <!-- FontAwesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-    <!-- Devicon -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
-
+    <!-- Tailwind Config -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    colors: {
-                        'bg-primary': '#0a0a0a',
-                        'bg-secondary': '#141414',
-                        'text-primary': '#f0f0f0',
-                        'text-secondary': '#a0a0a0',
-                        'accent-emerald': '#10b981',
-                        'accent-violet': '#8b5cf6',
-                        'border-subtle': '#2a2a2a',
-                    },
                     fontFamily: {
-                        'inter': ['Inter', 'sans-serif'],
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                        'mono': ['JetBrains Mono', 'monospace'],
                     },
+                    colors: {
+                        'bg-primary': '#0a0a0f',
+                        'bg-secondary': '#111118',
+                        'accent': {
+                            'primary': '#6366f1',
+                            'secondary': '#8b5cf6',
+                        }
+                    }
                 }
             }
         }
     </script>
 
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <!-- AOS - Animate on Scroll -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
+        /* Custom Styles */
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #111118;
+            --accent-primary: #6366f1;
+            --accent-secondary: #8b5cf6;
         }
 
-        .glass-card {
-            background: rgba(30, 30, 30, 0.6);
+        body {
+            background-color: var(--bg-primary);
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+
+        /* Glassmorphism */
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
-        .navbar-scrolled {
-            background: rgba(10, 10, 10, 0.9) !important;
-            backdrop-filter: blur(8px);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
         }
 
+        /* Tech Pills */
+        .tech-pill {
+            background: rgba(99, 102, 241, 0.15);
+            color: #a5b4fc;
+            padding: 4px 12px;
+            border-radius: 9999px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+        }
+
+        /* Gradient Text */
         .gradient-text {
-            background: linear-gradient(135deg, #10b981 0%, #8b5cf6 100%);
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        .hero-gradient {
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
-        }
-
-        @keyframes pulse-subtle {
+        /* WhatsApp Button Pulse */
+        @keyframes pulse-glow {
 
             0%,
             100% {
-                transform: scale(1);
+                box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
             }
 
             50% {
-                transform: scale(1.05);
+                box-shadow: 0 0 40px rgba(16, 185, 129, 0.6);
             }
         }
 
-        .pulse-animation {
-            animation: pulse-subtle 3s ease-in-out infinite;
+        .whatsapp-pulse {
+            animation: pulse-glow 2s ease-in-out infinite;
         }
 
-        .project-card {
-            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        /* Project Card Hover Effects */
+        .project-card:hover .project-image {
+            transform: scale(1.02);
         }
 
-        .project-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 15px 40px rgba(16, 185, 129, 0.2);
-        }
-
-        .tech-icon {
+        /* Smooth transitions */
+        .transition-smooth {
             transition: all 0.3s ease;
         }
 
-        .tech-icon:hover {
-            filter: brightness(1.3);
-            color: #10b981;
-            transform: translateY(-4px);
+        /* Hero Background Gradient */
+        .hero-gradient {
+            background: radial-gradient(ellipse at top right, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at bottom left, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
         }
 
-        /* Animações de Scroll */
-        .fade-in-up {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        /* Section gradients */
+        .section-gradient-indigo {
+            background: radial-gradient(ellipse at center, rgba(99, 102, 241, 0.08) 0%, transparent 70%);
         }
 
-        .fade-in-up.visible {
-            opacity: 1;
-            transform: translateY(0);
+        .section-gradient-violet {
+            background: radial-gradient(ellipse at center, rgba(139, 92, 246, 0.08) 0%, transparent 70%);
         }
 
-        .fade-in {
-            opacity: 0;
-            transition: opacity 0.8s ease-out;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-        }
-
-        /* Delay para efeito cascata */
-        .delay-100 {
-            transition-delay: 0.1s;
-        }
-
-        .delay-200 {
-            transition-delay: 0.2s;
-        }
-
-        .delay-300 {
-            transition-delay: 0.3s;
-        }
-
-        .delay-400 {
-            transition-delay: 0.4s;
-        }
-
-        .delay-500 {
-            transition-delay: 0.5s;
-        }
-
-        /* Placeholder para imagens dos projetos */
-        .project-image {
-            width: 100%;
-            height: 200px;
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1rem;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .project-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .project-image-placeholder {
-            color: rgba(255, 255, 255, 0.3);
-            font-size: 0.875rem;
-            text-align: center;
-            padding: 1rem;
+        .section-gradient-emerald {
+            background: radial-gradient(ellipse at center, rgba(16, 185, 129, 0.08) 0%, transparent 70%);
         }
     </style>
 </head>
 
-<body class="bg-bg-primary text-text-primary antialiased" x-data="{ mobileMenuOpen: false, scrolled: false }"
-    @scroll.window="scrolled = window.pageYOffset > 80">
+<body class="text-slate-100 antialiased" x-data="{ mobileMenuOpen: false }">
 
-    <!-- Navbar -->
-    <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
-        :class="scrolled ? 'navbar-scrolled' : 'bg-transparent'">
-        <nav class="container mx-auto px-6 py-4">
-            <div class="flex items-center justify-between">
+    <!-- ==================== NAVBAR ==================== -->
+    <nav class="fixed top-0 left-0 right-0 z-50 glass">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
                 <!-- Logo -->
-                <a href="#hero"
-                    class="text-2xl font-bold text-text-primary hover:text-accent-emerald transition-colors">
-                    Gabriel Hipólito
-                </a>
+                <a href="#" class="text-xl font-bold gradient-text">GH</a>
 
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="#abordagem" class="text-sm font-medium hover:text-accent-emerald transition-colors">A
-                        Abordagem</a>
-                    <a href="#cases" class="text-sm font-medium hover:text-accent-emerald transition-colors">Case
-                        Studies</a>
-                    <a href="#stack" class="text-sm font-medium hover:text-accent-emerald transition-colors">Arsenal
-                        Técnico</a>
-                    <a href="https://wa.me/5561983073229?text=Olá! Vi seu portfólio e gostaria de conversar."
-                        target="_blank"
-                        class="bg-accent-emerald text-white px-6 py-2 rounded-full font-medium hover:bg-emerald-600 transition-all hover:scale-105">
-                        Fale no WhatsApp →
-                    </a>
+                    <a href="#hero"
+                        class="text-slate-300 hover:text-white transition-smooth text-sm font-medium">Home</a>
+                    <a href="#abordagem"
+                        class="text-slate-300 hover:text-white transition-smooth text-sm font-medium">Abordagem</a>
+                    <a href="#cases"
+                        class="text-slate-300 hover:text-white transition-smooth text-sm font-medium">Cases</a>
+                    <a href="#stack"
+                        class="text-slate-300 hover:text-white transition-smooth text-sm font-medium">Stack</a>
+                    <a href="#contato"
+                        class="text-slate-300 hover:text-white transition-smooth text-sm font-medium">Contato</a>
                 </div>
 
                 <!-- Mobile Menu Button -->
-                <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden text-text-primary">
-                    <i class="fas fa-bars text-2xl"></i>
+                <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden text-slate-300 hover:text-white p-2"
+                    aria-label="Toggle menu">
+                    <i class="fas fa-bars text-xl" x-show="!mobileMenuOpen"></i>
+                    <i class="fas fa-times text-xl" x-show="mobileMenuOpen" x-cloak></i>
                 </button>
             </div>
+        </div>
 
-            <!-- Mobile Menu -->
-            <div x-show="mobileMenuOpen" x-transition class="md:hidden mt-4 pb-4 space-y-4">
-                <a href="#abordagem" @click="mobileMenuOpen = false"
-                    class="block text-sm font-medium hover:text-accent-emerald transition-colors">A Abordagem</a>
-                <a href="#cases" @click="mobileMenuOpen = false"
-                    class="block text-sm font-medium hover:text-accent-emerald transition-colors">Case Studies</a>
-                <a href="#stack" @click="mobileMenuOpen = false"
-                    class="block text-sm font-medium hover:text-accent-emerald transition-colors">Arsenal Técnico</a>
-                <a href="https://wa.me/5561983073229?text=Olá! Vi seu portfólio e gostaria de conversar."
+        <!-- Mobile Menu Overlay -->
+        <div x-show="mobileMenuOpen" x-transition:enter="transition ease-out duration-200"
+            x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+            x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100"
+            x-transition:leave-end="opacity-0" @click="mobileMenuOpen = false"
+            class="fixed inset-0 bg-black/80 z-40 md:hidden" x-cloak></div>
+
+        <!-- Mobile Menu Panel -->
+        <div x-show="mobileMenuOpen" x-transition:enter="transition ease-out duration-200"
+            x-transition:enter-start="translate-x-full" x-transition:enter-end="translate-x-0"
+            x-transition:leave="transition ease-in duration-150" x-transition:leave-start="translate-x-0"
+            x-transition:leave-end="translate-x-full"
+            class="fixed top-0 right-0 bottom-0 w-64 bg-bg-secondary z-50 p-6 md:hidden" x-cloak>
+            <div class="flex flex-col space-y-6 mt-12">
+                <a @click="mobileMenuOpen = false" href="#hero"
+                    class="text-slate-300 hover:text-white transition-smooth text-lg">Home</a>
+                <a @click="mobileMenuOpen = false" href="#abordagem"
+                    class="text-slate-300 hover:text-white transition-smooth text-lg">Abordagem</a>
+                <a @click="mobileMenuOpen = false" href="#cases"
+                    class="text-slate-300 hover:text-white transition-smooth text-lg">Cases</a>
+                <a @click="mobileMenuOpen = false" href="#stack"
+                    class="text-slate-300 hover:text-white transition-smooth text-lg">Stack</a>
+                <a @click="mobileMenuOpen = false" href="#contato"
+                    class="text-slate-300 hover:text-white transition-smooth text-lg">Contato</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ==================== HERO ==================== -->
+    <section id="hero" class="min-h-screen flex items-center justify-center hero-gradient pt-16">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <!-- Badge -->
+            <!-- Badge Disponibilidade -->
+            <div data-aos="fade-up" data-aos-delay="0"
+                class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-3">
+                <span class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></span>
+                <span class="text-sm text-slate-300">Disponível para novos projetos</span>
+            </div>
+
+            <!-- Badge Profissional -->
+            <div data-aos="fade-up" data-aos-delay="50"
+                class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-8">
+                <span class="text-indigo-400">✦</span>
+                <span class="text-sm text-slate-300">Engenheiro de Software · Fullstack & IA</span>
+            </div>
+
+            <!-- Tagline -->
+            <p data-aos="fade-up" data-aos-delay="100" class="text-indigo-400 font-medium mb-4">Freelancer Fullstack &
+                Especialista em IA</p>
+
+            <!-- Headline -->
+            <h1 data-aos="fade-up" data-aos-delay="200"
+                class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white mb-6 leading-tight">
+                Transformo Problemas de Negócio em <span class="gradient-text">Sistemas Inteligentes.</span>
+            </h1>
+
+            <!-- Subheadline -->
+            <p data-aos="fade-up" data-aos-delay="300"
+                class="text-lg sm:text-xl text-slate-400 mb-10 max-w-2xl mx-auto">
+                Automação, Gestão e Inteligência Artificial para empresas que buscam <strong class="text-white">escalar
+                    operações</strong> sem dor de cabeça.
+            </p>
+
+            <!-- CTAs -->
+            <div data-aos="fade-up" data-aos-delay="400"
+                class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="https://wa.me/5561983073229?text=Olá%20Gabriel!%20Vi%20seu%20portfólio%20e%20gostaria%20de%20conversar%20sobre%20um%20projeto."
                     target="_blank"
-                    class="inline-block bg-accent-emerald text-white px-6 py-2 rounded-full font-medium hover:bg-emerald-600 transition-all">
-                    Fale no WhatsApp →
+                    class="inline-flex items-center gap-3 px-8 py-4 bg-emerald-500 hover:bg-emerald-400 text-white font-semibold rounded-xl transition-smooth whatsapp-pulse">
+                    <i class="fab fa-whatsapp text-xl"></i>
+                    Fale Comigo no WhatsApp
+                </a>
+                <a href="#cases"
+                    class="inline-flex items-center gap-2 px-8 py-4 border border-white/20 hover:bg-white/5 text-white font-semibold rounded-xl transition-smooth">
+                    Ver Projetos
+                    <i class="fas fa-arrow-down"></i>
                 </a>
             </div>
-        </nav>
-    </header>
+        </div>
+    </section>
 
-    <main>
-        <!-- Hero Section -->
-        <section id="hero"
-            class="min-h-screen flex items-center justify-center relative overflow-hidden hero-gradient pt-20">
-            <div class="container mx-auto px-6 text-center relative z-10">
-                <div class="max-w-4xl mx-auto space-y-6">
-                    <!-- Eyebrow -->
-                    <p
-                        class="text-accent-emerald text-sm md:text-base font-semibold uppercase tracking-wider fade-in-up">
-                        Desenvolvedor Fullstack & Especialista em Automação
-                    </p>
-
-                    <!-- Headline -->
-                    <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold leading-tight fade-in-up delay-100">
-                        Eu construo sistemas que <span class="gradient-text">tiram problemas</span> do seu caminho.
-                    </h1>
-
-                    <!-- Subheadline -->
-                    <p
-                        class="text-lg md:text-xl text-text-secondary max-w-3xl mx-auto leading-relaxed fade-in-up delay-200">
-                        Você não precisa de mais código no mundo. Você precisa de uma solução que funcione.
-                        Sou Gabriel Hipólito — transformo processos manuais em sistemas inteligentes que economizam
-                        tempo,
-                        reduzem erros e geram resultados reais para o seu negócio.
-                    </p>
-
-                    <!-- CTAs -->
-                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6 fade-in-up delay-300">
-                        <a href="#cases"
-                            class="bg-accent-emerald text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-emerald-600 transition-all hover:scale-105 shadow-lg">
-                            Ver Case Studies ↓
-                        </a>
-                        <a href="https://wa.me/5511999999999?text=Olá! Vi seu portfólio e gostaria de conversar."
-                            target="_blank" class="text-text-secondary hover:text-accent-emerald transition-colors">
-                            ou fale diretamente comigo no WhatsApp
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- A Abordagem Section -->
-        <section id="abordagem" class="py-20 md:py-32 bg-bg-secondary">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-16 fade-in-up">
-                    <h2 class="text-3xl md:text-5xl font-bold mb-4">
-                        Menos Código. <span class="gradient-text">Mais Resultado.</span>
-                    </h2>
-                    <p class="text-text-secondary text-lg md:text-xl max-w-2xl mx-auto">
-                        Minha metodologia para entregar soluções que realmente funcionam.
-                    </p>
-                </div>
-
-                <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                    <!-- Card 1 -->
-                    <div class="glass-card rounded-2xl p-8 hover:border-accent-emerald transition-all fade-in-up">
-                        <div class="text-5xl mb-4">🎯</div>
-                        <h3 class="text-xl font-semibold mb-3">Foco no Problema Real</h3>
-                        <p class="text-text-secondary leading-relaxed">
-                            Antes de escrever uma linha de código, eu mergulho na sua dor de operação.
-                            Entendo o fluxo, os gargalos e o que realmente precisa ser resolvido.
-                        </p>
-                    </div>
-
-                    <!-- Card 2 -->
-                    <div
-                        class="glass-card rounded-2xl p-8 hover:border-accent-violet transition-all fade-in-up delay-100">
-                        <div class="text-5xl mb-4">⚙️</div>
-                        <h3 class="text-xl font-semibold mb-3">Arquitetura à Prova de Balas</h3>
-                        <p class="text-text-secondary leading-relaxed">
-                            Construo sistemas robustos com tratamento de erros, validações e lógica que não quebra
-                            no primeiro cenário inesperado.
-                        </p>
-                    </div>
-
-                    <!-- Card 3 -->
-                    <div
-                        class="glass-card rounded-2xl p-8 hover:border-accent-emerald transition-all fade-in-up delay-200">
-                        <div class="text-5xl mb-4">📈</div>
-                        <h3 class="text-xl font-semibold mb-3">Entrega Orientada a Valor</h3>
-                        <p class="text-text-secondary leading-relaxed">
-                            Meu sucesso é medido pelo seu retorno: horas economizadas, erros eliminados e processos mais
-                            ágeis.
-                            Métricas, não features.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Case Studies Section -->
-        <section id="cases" class="py-20 md:py-32 bg-bg-primary">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-16 fade-in-up">
-                    <h2 class="text-3xl md:text-5xl font-bold mb-4">
-                        Case Studies: <span class="gradient-text">Problemas Resolvidos</span>
-                    </h2>
-                    <p class="text-text-secondary text-lg md:text-xl max-w-2xl mx-auto">
-                        Cada projeto abaixo nasceu de uma dor real. Clique para explorar a solução.
-                    </p>
-                </div>
-
-                <!-- Bento Grid -->
-                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
-                    <!-- CONCAN - 2 cols -->
-                    <a href="https://github.com/ghmata/concan" target="_blank"
-                        class="project-card glass-card rounded-2xl p-8 md:col-span-2 lg:col-span-2 border border-border-subtle hover:border-accent-emerald group fade-in-up">
-                        <!-- 
-                            ⚠️ SUBSTITUA A IMAGEM ABAIXO:
-                            Adicione uma screenshot do projeto CONCAN em /images/concan.png
-                            Tamanho recomendado: 800x450px (16:9)
-                        -->
-                        <div class="project-image">
-                            <img src="images/concan.png" alt="Screenshot do Sistema CONCAN"
-                                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                            <div class="project-image-placeholder" style="display: none;">
-                                <i class="fas fa-image text-4xl mb-2"></i>
-                                <p>Adicione screenshot do CONCAN<br>(800x450px)</p>
-                            </div>
-                        </div>
-
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="text-xs px-3 py-1 rounded-full bg-emerald-500/20 text-accent-emerald">Gestão de
-                                Operações</span>
-                            <span
-                                class="text-xs px-3 py-1 rounded-full bg-emerald-500/20 text-accent-emerald">Mobile-First</span>
-                        </div>
-                        <h3 class="text-2xl font-bold mb-2 group-hover:text-accent-emerald transition-colors">CONCAN
-                        </h3>
-                        <p class="text-lg text-accent-emerald mb-4">Recebimento de carga aérea sem papel e sem atrasos.
-                        </p>
-                        <p class="text-text-secondary mb-4 text-sm">
-                            <strong class="text-text-primary">O Problema:</strong> Conferência manual de manifestos de
-                            carga gerava retrabalho,
-                            erros de digitação e atrasos na liberação de materiais.
-                        </p>
-                        <p class="text-text-secondary mb-4 text-sm">
-                            <strong class="text-text-primary">A Solução:</strong> Sistema web com importação automática
-                            de PDFs,
-                            dashboard de conferência em tempo real e sincronização colaborativa via Google Sheets.
-                        </p>
-                        <div class="space-y-1 text-sm text-text-secondary mb-4">
-                            <p>✅ Importação automática de PDFs</p>
-                            <p>✅ Dashboard de status ao vivo</p>
-                            <p>✅ Sincronização Google Sheets</p>
-                        </div>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="text-xs px-2 py-1 bg-bg-secondary rounded">Python</span>
-                            <span class="text-xs px-2 py-1 bg-bg-secondary rounded">Flask</span>
-                            <span class="text-xs px-2 py-1 bg-bg-secondary rounded">SQLite</span>
-                        </div>
-                    </a>
-
-                    <!-- LOCAMIL - 2 cols -->
-                    <a href="https://github.com/ghmata/locamil" target="_blank"
-                        class="project-card glass-card rounded-2xl p-8 md:col-span-2 lg:col-span-2 border border-border-subtle hover:border-accent-emerald group fade-in-up delay-100">
-                        <!-- 
-                            ⚠️ SUBSTITUA A IMAGEM ABAIXO:
-                            Adicione uma screenshot do projeto LOCAMIL em /images/locamil.png
-                            Tamanho recomendado: 800x450px (16:9)
-                        -->
-                        <div class="project-image">
-                            <img src="images/locamil.png" alt="Screenshot do Sistema LOCAMIL"
-                                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                            <div class="project-image-placeholder" style="display: none;">
-                                <i class="fas fa-image text-4xl mb-2"></i>
-                                <p>Adicione screenshot do LOCAMIL<br>(800x450px)</p>
-                            </div>
-                        </div>
-
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="text-xs px-3 py-1 rounded-full bg-emerald-500/20 text-accent-emerald">Gestão de
-                                Ativos</span>
-                            <span
-                                class="text-xs px-3 py-1 rounded-full bg-emerald-500/20 text-accent-emerald">CRM</span>
-                        </div>
-                        <h3 class="text-2xl font-bold mb-2 group-hover:text-accent-emerald transition-colors">LOCAMIL
-                        </h3>
-                        <p class="text-lg text-accent-emerald mb-4">Controle total da sua frota com um clique.</p>
-                        <p class="text-text-secondary mb-4 text-sm">
-                            <strong class="text-text-primary">O Problema:</strong> Controle de locações em planilhas
-                            dispersas,
-                            sem validação de conflitos de datas, e gestão financeira manual propensa a erros.
-                        </p>
-                        <p class="text-text-secondary mb-4 text-sm">
-                            <strong class="text-text-primary">A Solução:</strong> Sistema completo com dashboard
-                            interativo,
-                            validação automática de disponibilidade, cálculo de diárias e exportação de relatórios em
-                            múltiplos formatos.
-                        </p>
-                        <div class="space-y-1 text-sm text-text-secondary mb-4">
-                            <p>✅ Dashboard de status por veículo</p>
-                            <p>✅ Validação de conflitos de datas</p>
-                            <p>✅ Exportação SQL/CSV/JSON</p>
-                        </div>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="text-xs px-2 py-1 bg-bg-secondary rounded">Python</span>
-                            <span class="text-xs px-2 py-1 bg-bg-secondary rounded">Flask</span>
-                            <span class="text-xs px-2 py-1 bg-bg-secondary rounded">SQLAlchemy</span>
-                        </div>
-                    </a>
-
-                    <!-- COMREC - 1 col -->
-                    <a href="https://github.com/ghmata/sistema-comrec" target="_blank"
-                        class="project-card glass-card rounded-2xl p-8 border border-border-subtle hover:border-accent-violet group fade-in-up delay-200">
-                        <!-- 
-                            ⚠️ SUBSTITUA A IMAGEM ABAIXO:
-                            Adicione uma screenshot do projeto COMREC em /images/comrec.png
-                            Tamanho recomendado: 600x400px
-                        -->
-                        <div class="project-image" style="height: 150px;">
-                            <img src="images/comrec.png" alt="Screenshot do Sistema COMREC"
-                                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                            <div class="project-image-placeholder" style="display: none;">
-                                <i class="fas fa-image text-3xl mb-2"></i>
-                                <p class="text-xs">Screenshot COMREC<br>(600x400px)</p>
-                            </div>
-                        </div>
-
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span
-                                class="text-xs px-3 py-1 rounded-full bg-violet-500/20 text-accent-violet">Workflow</span>
-                        </div>
-                        <h3 class="text-xl font-bold mb-2 group-hover:text-accent-violet transition-colors">COMREC</h3>
-                        <p class="text-base text-accent-violet mb-3">Requisições rastreadas do início ao fim.</p>
-                        <p class="text-text-secondary mb-3 text-sm">
-                            Sistema de gestão de recebimento com multi-role e chat integrado.
-                        </p>
-                        <div class="space-y-1 text-xs text-text-secondary mb-3">
-                            <p>✅ Multi-role (Emissor, TSRE, Admin)</p>
-                            <p>✅ Chat integrado</p>
-                        </div>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="text-xs px-2 py-1 bg-bg-secondary rounded">Python</span>
-                            <span class="text-xs px-2 py-1 bg-bg-secondary rounded">Flask</span>
-                        </div>
-                    </a>
-
-                    <!-- PDF EXTRACT - 1 col -->
-                    <a href="https://github.com/ghmata/Conversor_PDF-EXCEL" target="_blank"
-                        class="project-card glass-card rounded-2xl p-8 border border-border-subtle hover:border-accent-violet group fade-in-up delay-300">
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="text-xs px-3 py-1 rounded-full bg-violet-500/20 text-accent-violet">Automação
-                                (RPA)</span>
-                        </div>
-                        <h3 class="text-xl font-bold mb-2 group-hover:text-accent-violet transition-colors">PDF Extract
-                            Pro</h3>
-                        <p class="text-base text-accent-violet mb-3">Milhares de PDFs para Excel. Sem travar. Sem erro.
-                        </p>
-                        <p class="text-text-secondary mb-3 text-sm">
-                            Aplicação Desktop robusta com processamento em lote massivo.
-                        </p>
-                        <div class="space-y-1 text-xs text-text-secondary mb-3">
-                            <p>✅ Processamento em lote</p>
-                            <p>✅ Tolerância a falhas</p>
-                        </div>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="text-xs px-2 py-1 bg-bg-secondary rounded">Python</span>
-                            <span class="text-xs px-2 py-1 bg-bg-secondary rounded">Tkinter</span>
-                        </div>
-                    </a>
-
-                    <!-- BNCC PRO - 2 cols -->
-                    <a href="https://github.com/ghmata/Gerador_de_Plano_de_Aula" target="_blank"
-                        class="project-card glass-card rounded-2xl p-8 md:col-span-2 border border-border-subtle hover:border-accent-violet group fade-in-up delay-400">
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span
-                                class="text-xs px-3 py-1 rounded-full bg-violet-500/20 text-accent-violet">Inteligência
-                                Artificial</span>
-                            <span
-                                class="text-xs px-3 py-1 rounded-full bg-violet-500/20 text-accent-violet">EdTech</span>
-                        </div>
-                        <h3 class="text-2xl font-bold mb-2 group-hover:text-accent-violet transition-colors">Planejador
-                            BNCC Pro</h3>
-                        <p class="text-lg text-accent-violet mb-4">IA que planeja sua aula. Você só ensina.</p>
-                        <p class="text-text-secondary mb-4 text-sm">
-                            <strong class="text-text-primary">O Problema:</strong> Professores gastavam horas criando
-                            planos de aula
-                            que atendessem à BNCC, com códigos de habilidades, adequações e metodologias ativas.
-                        </p>
-                        <p class="text-text-secondary mb-4 text-sm">
-                            <strong class="text-text-primary">A Solução:</strong> SaaS EdTech com IA Generativa (Google
-                            Gemini)
-                            que recebe o contexto da turma e gera planos completos, com compliance legal e exportação
-                            para PDF.
-                        </p>
-                        <div class="space-y-1 text-sm text-text-secondary mb-4">
-                            <p>✅ IA Generativa (Google Gemini)</p>
-                            <p>✅ Compliance BNCC automático</p>
-                            <p>✅ Módulo de Gamificação</p>
-                        </div>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="text-xs px-2 py-1 bg-bg-secondary rounded">Python</span>
-                            <span class="text-xs px-2 py-1 bg-bg-secondary rounded">Google Gemini API</span>
-                            <span class="text-xs px-2 py-1 bg-bg-secondary rounded">TailwindCSS</span>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Arsenal Técnico Section -->
-        <section id="stack" class="py-20 md:py-32 bg-bg-secondary">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-16 fade-in-up">
-                    <h2 class="text-3xl md:text-5xl font-bold mb-4">
-                        <span class="gradient-text">Arsenal Técnico</span>
-                    </h2>
-                    <p class="text-text-secondary text-lg md:text-xl max-w-2xl mx-auto">
-                        As ferramentas que uso diariamente para resolver problemas.
-                    </p>
-                </div>
-
-                <div class="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-6 gap-8 max-w-5xl mx-auto">
-                    <div class="tech-icon flex flex-col items-center justify-center group fade-in-up" title="Python">
-                        <i class="devicon-python-plain text-5xl md:text-6xl text-text-secondary"></i>
-                        <span
-                            class="text-xs mt-2 text-text-secondary group-hover:text-accent-emerald transition-colors">Python</span>
-                    </div>
-                    <div class="tech-icon flex flex-col items-center justify-center group fade-in-up delay-100"
-                        title="Flask">
-                        <i class="devicon-flask-original text-5xl md:text-6xl text-text-secondary"></i>
-                        <span
-                            class="text-xs mt-2 text-text-secondary group-hover:text-accent-emerald transition-colors">Flask</span>
-                    </div>
-                    <div class="tech-icon flex flex-col items-center justify-center group fade-in-up delay-200"
-                        title="JavaScript">
-                        <i class="devicon-javascript-plain text-5xl md:text-6xl text-text-secondary"></i>
-                        <span
-                            class="text-xs mt-2 text-text-secondary group-hover:text-accent-emerald transition-colors">JavaScript</span>
-                    </div>
-                    <div class="tech-icon flex flex-col items-center justify-center group fade-in-up delay-300"
-                        title="HTML5">
-                        <i class="devicon-html5-plain text-5xl md:text-6xl text-text-secondary"></i>
-                        <span
-                            class="text-xs mt-2 text-text-secondary group-hover:text-accent-emerald transition-colors">HTML5</span>
-                    </div>
-                    <div class="tech-icon flex flex-col items-center justify-center group fade-in-up delay-400"
-                        title="CSS3">
-                        <i class="devicon-css3-plain text-5xl md:text-6xl text-text-secondary"></i>
-                        <span
-                            class="text-xs mt-2 text-text-secondary group-hover:text-accent-emerald transition-colors">CSS3</span>
-                    </div>
-                    <div class="tech-icon flex flex-col items-center justify-center group fade-in-up delay-500"
-                        title="TailwindCSS">
-                        <i class="devicon-tailwindcss-plain text-5xl md:text-6xl text-text-secondary"></i>
-                        <span
-                            class="text-xs mt-2 text-text-secondary group-hover:text-accent-emerald transition-colors">Tailwind</span>
-                    </div>
-                    <div class="tech-icon flex flex-col items-center justify-center group fade-in-up" title="Bootstrap">
-                        <i class="devicon-bootstrap-plain text-5xl md:text-6xl text-text-secondary"></i>
-                        <span
-                            class="text-xs mt-2 text-text-secondary group-hover:text-accent-emerald transition-colors">Bootstrap</span>
-                    </div>
-                    <div class="tech-icon flex flex-col items-center justify-center group fade-in-up delay-100"
-                        title="SQLite">
-                        <i class="devicon-sqlite-plain text-5xl md:text-6xl text-text-secondary"></i>
-                        <span
-                            class="text-xs mt-2 text-text-secondary group-hover:text-accent-emerald transition-colors">SQLite</span>
-                    </div>
-                    <div class="tech-icon flex flex-col items-center justify-center group fade-in-up delay-200"
-                        title="PostgreSQL">
-                        <i class="devicon-postgresql-plain text-5xl md:text-6xl text-text-secondary"></i>
-                        <span
-                            class="text-xs mt-2 text-text-secondary group-hover:text-accent-emerald transition-colors">PostgreSQL</span>
-                    </div>
-                    <div class="tech-icon flex flex-col items-center justify-center group fade-in-up delay-300"
-                        title="Git">
-                        <i class="devicon-git-plain text-5xl md:text-6xl text-text-secondary"></i>
-                        <span
-                            class="text-xs mt-2 text-text-secondary group-hover:text-accent-emerald transition-colors">Git</span>
-                    </div>
-                    <div class="tech-icon flex flex-col items-center justify-center group fade-in-up delay-400"
-                        title="GitHub">
-                        <i class="devicon-github-original text-5xl md:text-6xl text-text-secondary"></i>
-                        <span
-                            class="text-xs mt-2 text-text-secondary group-hover:text-accent-emerald transition-colors">GitHub</span>
-                    </div>
-                    <div class="tech-icon flex flex-col items-center justify-center group fade-in-up delay-500"
-                        title="Pandas">
-                        <i class="devicon-pandas-plain text-5xl md:text-6xl text-text-secondary"></i>
-                        <span
-                            class="text-xs mt-2 text-text-secondary group-hover:text-accent-emerald transition-colors">Pandas</span>
-                    </div>
-                    <div class="tech-icon flex flex-col items-center justify-center group fade-in-up"
-                        title="Machine Learning">
-                        <i class="fas fa-brain text-5xl md:text-6xl text-text-secondary"></i>
-                        <span
-                            class="text-xs mt-2 text-text-secondary group-hover:text-accent-emerald transition-colors">ML</span>
-                    </div>
-                    <div class="tech-icon flex flex-col items-center justify-center group fade-in-up delay-100"
-                        title="Google Gemini">
-                        <i class="fas fa-star text-5xl md:text-6xl text-text-secondary"></i>
-                        <span
-                            class="text-xs mt-2 text-text-secondary group-hover:text-accent-emerald transition-colors">Gemini</span>
-                    </div>
-                    <div class="tech-icon flex flex-col items-center justify-center group fade-in-up delay-200"
-                        title="VS Code">
-                        <i class="devicon-vscode-plain text-5xl md:text-6xl text-text-secondary"></i>
-                        <span
-                            class="text-xs mt-2 text-text-secondary group-hover:text-accent-emerald transition-colors">VS
-                            Code</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- CTA Final Section -->
-        <section class="py-20 md:py-32 bg-bg-primary">
-            <div class="container mx-auto px-6">
-                <div class="max-w-4xl mx-auto text-center glass-card rounded-2xl p-12 fade-in-up">
-                    <h2 class="text-3xl md:text-5xl font-bold mb-6">
-                        Pronto para <span class="gradient-text">resolver seu problema?</span>
-                    </h2>
-                    <p class="text-text-secondary text-lg md:text-xl mb-8 max-w-2xl mx-auto">
-                        Vamos conversar sobre como posso ajudar seu negócio a economizar tempo,
-                        reduzir erros e aumentar a eficiência com automação e sistemas inteligentes.
-                    </p>
-                    <a href="https://wa.me/5511999999999?text=Olá Gabriel! Vi seu portfólio e gostaria de conversar sobre um projeto."
-                        target="_blank"
-                        class="inline-flex items-center gap-2 bg-accent-emerald text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-emerald-600 transition-all hover:scale-105 shadow-lg">
-                        <i class="fab fa-whatsapp text-2xl"></i>
-                        Falar no WhatsApp Agora
-                    </a>
-                    <p class="text-text-secondary text-sm mt-4">
-                        Respondo em até 24 horas
-                    </p>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-bg-secondary py-8 border-t border-border-subtle">
-        <div class="container mx-auto px-6">
-            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
-                <p class="text-text-secondary text-sm">
-                    © 2025 Gabriel Hipólito. Desenvolvido com <span class="text-accent-emerald">❤️</span> e muito café.
+    <!-- ==================== ABORDAGEM ==================== -->
+    <section id="abordagem" class="py-24 bg-bg-secondary">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Header -->
+            <div class="text-center mb-16">
+                <h2 data-aos="fade-up" class="text-3xl sm:text-4xl font-bold text-white mb-4">Minha Abordagem</h2>
+                <p data-aos="fade-up" data-aos-delay="100" class="text-lg text-slate-400 max-w-2xl mx-auto">
+                    Não entrego "sites". Entrego <strong class="text-white">soluções que funcionam no mundo
+                        real</strong>.
                 </p>
-                <div class="flex items-center gap-6">
-                    <a href="https://github.com/ghmata" target="_blank"
-                        class="text-text-secondary hover:text-accent-emerald transition-colors" aria-label="GitHub">
-                        <i class="fab fa-github text-xl"></i>
-                    </a>
-                    <a href="https://wa.me/5511999999999" target="_blank"
-                        class="text-text-secondary hover:text-accent-emerald transition-colors" aria-label="WhatsApp">
-                        <i class="fab fa-whatsapp text-xl"></i>
-                    </a>
+            </div>
+
+            <!-- Cards Grid -->
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div data-aos="fade-up" data-aos-delay="0"
+                    class="glass-card p-8 hover:border-indigo-500/30 transition-smooth">
+                    <div class="text-4xl mb-6">🎯</div>
+                    <h3 class="text-xl font-bold text-white mb-4">Foco no Problema</h3>
+                    <p class="text-slate-400">Antes de escrever código, eu entendo sua operação. Cada linha é pensada
+                        para resolver gargalos reais.</p>
+                </div>
+
+                <!-- Card 2 -->
+                <div data-aos="fade-up" data-aos-delay="100"
+                    class="glass-card p-8 hover:border-indigo-500/30 transition-smooth">
+                    <div class="text-4xl mb-6">⚡</div>
+                    <h3 class="text-xl font-bold text-white mb-4">Velocidade de Entrega</h3>
+                    <p class="text-slate-400">MVPs em semanas, não meses. Você começa a usar enquanto refinamos juntos.
+                    </p>
+                </div>
+
+                <!-- Card 3 -->
+                <div data-aos="fade-up" data-aos-delay="200"
+                    class="glass-card p-8 hover:border-indigo-500/30 transition-smooth">
+                    <div class="text-4xl mb-6">🔒</div>
+                    <h3 class="text-xl font-bold text-white mb-4">Código Proprietário</h3>
+                    <p class="text-slate-400">Você é dono de tudo. Sem vendor lock-in, sem surpresas.</p>
                 </div>
             </div>
         </div>
+    </section>
+
+    <!-- ==================== CASES (PROJETOS) ==================== -->
+    <section id="cases" class="py-24">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Header -->
+            <div class="text-center mb-16">
+                <h2 data-aos="fade-up" class="text-3xl sm:text-4xl font-bold text-white mb-4">Cases de Sucesso</h2>
+                <p data-aos="fade-up" data-aos-delay="100" class="text-lg text-slate-400 max-w-2xl mx-auto">
+                    Projetos reais que resolvem problemas reais.
+                </p>
+            </div>
+
+            <!-- ===== CASE 1: COMREC ===== -->
+            <div data-aos="fade-up" class="project-card mb-20" x-data="{ activeSlide: 1, totalSlides: 2 }">
+                <div class="flex flex-col lg:flex-row gap-8 items-center">
+                    <!-- Image Carousel -->
+                    <div class="lg:w-7/8 relative section-gradient-indigo rounded-2xl p-4">
+                        <div class="aspect-video rounded-xl overflow-hidden border border-white/10 relative group">
+                            <!-- Slides -->
+                            <img x-show="activeSlide === 1" src="./images/sistema-comrec-1.png" alt="COMREC Dashboard"
+                                class="w-full h-full object-cover project-image transition-smooth" loading="lazy">
+                            <img x-show="activeSlide === 2" src="./images/sistema-comrec-2.png" alt="COMREC Workflow"
+                                class="w-full h-full object-cover project-image transition-smooth" loading="lazy">
+
+                            <!-- Navigation Arrows -->
+                            <div class="absolute inset-y-0 left-0 flex items-center">
+                                <button @click="activeSlide = activeSlide === 1 ? totalSlides : activeSlide - 1"
+                                    class="p-3 ml-2 bg-black/40 hover:bg-black/60 rounded-full transition-smooth">
+                                    <i class="fas fa-chevron-left text-white"></i>
+                                </button>
+                            </div>
+                            <div class="absolute inset-y-0 right-0 flex items-center">
+                                <button @click="activeSlide = activeSlide === totalSlides ? 1 : activeSlide + 1"
+                                    class="p-3 mr-2 bg-black/40 hover:bg-black/60 rounded-full transition-smooth">
+                                    <i class="fas fa-chevron-right text-white"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content -->
+                    <div class="lg:w-2/5">
+                        <span class="tech-pill mb-4 inline-block">COMUNICAÇÃO INTERNA</span>
+                        <h3 class="text-2xl sm:text-3xl font-bold text-white mb-2">Sistema COMREC</h3>
+                        <p class="text-indigo-400 font-medium mb-4">Gestão de Recebimento de Materiais com Workflow
+                            Inteligente</p>
+                        <p class="text-slate-400 mb-6">
+                            Plataforma web para <strong class="text-slate-200">rastrear o ciclo de vida completo de
+                                materiais e documentos</strong> em ambiente corporativo. Com múltiplos perfis de
+                            usuário, o sistema automatiza notificações e elimina retrabalho.
+                        </p>
+
+                        <!-- Metrics -->
+                        <div class="flex flex-wrap gap-3 mb-6">
+                            <span class="text-xs px-3 py-1 bg-emerald-500/10 text-emerald-400 rounded-full">↓ 80% tempo
+                                de rastreamento</span>
+                            <span class="text-xs px-3 py-1 bg-indigo-500/10 text-indigo-400 rounded-full">3 perfis de
+                                acesso</span>
+                            <span class="text-xs px-3 py-1 bg-violet-500/10 text-violet-400 rounded-full">Chat
+                                integrado</span>
+                        </div>
+
+                        <!-- Stack -->
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="tech-pill">Python</span>
+                            <span class="tech-pill">Flask</span>
+                            <span class="tech-pill">SQLAlchemy</span>
+                            <span class="tech-pill">Bootstrap 5</span>
+                        </div>
+
+                        <!-- Buttons -->
+                        <div class="flex gap-4">
+                            <a href="https://github.com/ghmata/sistema-comrec" target="_blank"
+                                class="inline-flex items-center gap-2 px-5 py-2.5 border border-white/20 hover:bg-white/5 text-white font-medium rounded-lg transition-smooth text-sm relative z-10">
+                                <i class="fab fa-github"></i>
+                                GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== CASE 2: CONCAN ===== -->
+            <div data-aos="fade-up" class="project-card mb-20" x-data="{ activeSlide: 1, totalSlides: 3 }">
+                <div class="flex flex-col lg:flex-row-reverse gap-8 items-center">
+                    <!-- Image (Mobile Frame with Carousel) -->
+                    <div class="lg:w-3/5 relative section-gradient-violet rounded-2xl p-8 flex justify-center">
+                        <div class="relative">
+                            <!-- iPhone Frame -->
+                            <div
+                                class="w-[300px] h-[650px] bg-gray-900 rounded-[3rem] border-[8px] border-gray-800 shadow-2xl shadow-violet-500/20 overflow-hidden relative">
+                                <!-- Carousel inside phone frame -->
+                                <img x-show="activeSlide === 1" src="./images/concan-1.png" alt="CONCAN Interface"
+                                    class="w-full h-full object-cover" loading="lazy">
+                                <img x-show="activeSlide === 2" src="./images/concan-2.png" alt="CONCAN Lista"
+                                    class="w-full h-full object-cover" loading="lazy">
+                                <img x-show="activeSlide === 3" src="./images/concan-3.png" alt="CONCAN Detalhes"
+                                    class="w-full h-full object-cover" loading="lazy">
+
+                                <!-- Navigation Arrows -->
+                                <div class="absolute inset-y-0 left-0 flex items-center">
+                                    <button @click="activeSlide = activeSlide === 1 ? totalSlides : activeSlide - 1"
+                                        class="p-3 ml-2 bg-black/40 hover:bg-black/60 rounded-full transition-smooth">
+                                        <i class="fas fa-chevron-left text-white"></i>
+                                    </button>
+                                </div>
+                                <div class="absolute inset-y-0 right-0 flex items-center">
+                                    <button @click="activeSlide = activeSlide === totalSlides ? 1 : activeSlide + 1"
+                                        class="p-3 mr-2 bg-black/40 hover:bg-black/60 rounded-full transition-smooth">
+                                        <i class="fas fa-chevron-right text-white"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- Notch -->
+                            <div class="absolute top-4 left-1/2 -translate-x-1/2 w-24 h-6 bg-black rounded-full z-20">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content -->
+                    <div class="lg:w-2/5">
+                        <span class="tech-pill mb-4 inline-block">GESTÃO MOBILE-FIRST</span>
+                        <h3 class="text-2xl sm:text-3xl font-bold text-white mb-2">CONCAN</h3>
+                        <p class="text-violet-400 font-medium mb-4">Controle de Contas a Pagar com Interface Nativa para
+                            Celular</p>
+                        <p class="text-slate-400 mb-6">
+                            Aplicação web otimizada para dispositivos móveis, projetada para <strong
+                                class="text-slate-200">gestão financeira de pequenas operações</strong>. Substitui o
+                            controle via cadernos e WhatsApp por um sistema acessível de qualquer lugar.
+                        </p>
+
+                        <!-- Metrics -->
+                        <div class="flex flex-wrap gap-3 mb-6">
+                            <span class="text-xs px-3 py-1 bg-emerald-500/10 text-emerald-400 rounded-full">100%
+                                mobile-first</span>
+                            <span class="text-xs px-3 py-1 bg-violet-500/10 text-violet-400 rounded-full">Alertas de
+                                vencimento</span>
+                            <span class="text-xs px-3 py-1 bg-indigo-500/10 text-indigo-400 rounded-full">Zero
+                                instalação</span>
+                        </div>
+
+                        <!-- Stack -->
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="tech-pill">Python</span>
+                            <span class="tech-pill">Flask</span>
+                            <span class="tech-pill">Jinja2</span>
+                            <span class="tech-pill">SQLite</span>
+                        </div>
+
+                        <!-- Buttons -->
+                        <div class="flex gap-4">
+                            <a href="https://github.com/ghmata/concan" target="_blank"
+                                class="inline-flex items-center gap-2 px-5 py-2.5 border border-white/20 hover:bg-white/5 text-white font-medium rounded-lg transition-smooth text-sm relative z-10">
+                                <i class="fab fa-github"></i>
+                                GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== CASE 3: LOCAMIL PRO ===== -->
+            <div data-aos="fade-up" class="project-card mb-20" x-data="{ activeSlide: 1, totalSlides: 2 }">
+                <div class="flex flex-col lg:flex-row gap-8 items-center">
+                    <!-- Image Carousel -->
+                    <div class="lg:w-7/8 relative section-gradient-emerald rounded-2xl p-4">
+                        <div
+                            class="aspect-video rounded-xl overflow-hidden border border-emerald-500/20 relative group">
+                            <!-- Slides -->
+                            <img x-show="activeSlide === 1" src="./images/locamil-1.png" alt="Locamil Dashboard"
+                                class="w-full h-full object-cover project-image transition-smooth" loading="lazy">
+                            <img x-show="activeSlide === 2" src="./images/locamil-2.png" alt="Locamil Frotas"
+                                class="w-full h-full object-cover project-image transition-smooth" loading="lazy">
+
+                            <!-- Navigation Arrows -->
+                            <div class="absolute inset-y-0 left-0 flex items-center">
+                                <button @click="activeSlide = activeSlide === 1 ? totalSlides : activeSlide - 1"
+                                    class="p-3 ml-2 bg-black/40 hover:bg-black/60 rounded-full transition-smooth">
+                                    <i class="fas fa-chevron-left text-white"></i>
+                                </button>
+                            </div>
+                            <div class="absolute inset-y-0 right-0 flex items-center">
+                                <button @click="activeSlide = activeSlide === totalSlides ? 1 : activeSlide + 1"
+                                    class="p-3 mr-2 bg-black/40 hover:bg-black/60 rounded-full transition-smooth">
+                                    <i class="fas fa-chevron-right text-white"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content -->
+                    <div class="lg:w-2/5">
+                        <span class="tech-pill mb-4 inline-block"
+                            style="background: rgba(16, 185, 129, 0.15); color: #6ee7b7;">SAAS DE LOCAÇÃO</span>
+                        <h3 class="text-2xl sm:text-3xl font-bold text-white mb-2">Locamil Pro</h3>
+                        <p class="text-emerald-400 font-medium mb-4">Sistema Completo de Gestão de Frotas e Locação de
+                            Veículos</p>
+                        <p class="text-slate-400 mb-6">
+                            Plataforma SaaS para locadoras com <strong class="text-slate-200">dashboard financeiro,
+                                controle de manutenção e agenda de reservas</strong>. Oferece visão consolidada e
+                            previne overbooking.
+                        </p>
+
+                        <!-- Metrics -->
+                        <div class="flex flex-wrap gap-3 mb-6">
+                            <span class="text-xs px-3 py-1 bg-emerald-500/10 text-emerald-400 rounded-full">Dashboard em
+                                tempo real</span>
+                            <span class="text-xs px-3 py-1 bg-teal-500/10 text-teal-400 rounded-full">Controle de
+                                manutenção</span>
+                            <span
+                                class="text-xs px-3 py-1 bg-cyan-500/10 text-cyan-400 rounded-full">Multi-tenant</span>
+                        </div>
+
+                        <!-- Stack -->
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="tech-pill">Python</span>
+                            <span class="tech-pill">Flask</span>
+                            <span class="tech-pill">Chart.js</span>
+                            <span class="tech-pill">Bootstrap 5</span>
+                        </div>
+
+                        <!-- Buttons -->
+                        <div class="flex gap-4">
+                            <a href="https://github.com/ghmata/locamil" target="_blank"
+                                class="inline-flex items-center gap-2 px-5 py-2.5 border border-white/20 hover:bg-white/5 text-white font-medium rounded-lg transition-smooth text-sm relative z-10">
+                                <i class="fab fa-github"></i>
+                                GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== CASE 4: DocMind AI ===== -->
+            <div data-aos="fade-up" class="project-card mb-20" x-data="{ activeSlide: 1, totalSlides: 3 }">
+                <div class="flex flex-col lg:flex-row-reverse gap-8 items-center">
+                    <!-- Image Carousel -->
+                    <div class="lg:w-3/5 relative section-gradient-violet rounded-2xl p-4">
+                        <div class="aspect-video rounded-xl overflow-hidden border border-cyan-500/20 relative group">
+                            <!-- Slides -->
+                            <img x-show="activeSlide === 1" src="./images/docmind1.png" alt="DocMind AI Interface"
+                                class="w-full h-full object-cover project-image transition-smooth" loading="lazy">
+                            <img x-show="activeSlide === 2" src="./images/docmind2.png" alt="DocMind AI Dashboard"
+                                class="w-full h-full object-cover project-image transition-smooth" loading="lazy">
+                            <img x-show="activeSlide === 3" src="./images/docmind3.png" alt="DocMind AI Análise"
+                                class="w-full h-full object-cover project-image transition-smooth" loading="lazy">
+
+                            <!-- Navigation Arrows -->
+                            <div class="absolute inset-y-0 left-0 flex items-center">
+                                <button @click="activeSlide = activeSlide === 1 ? totalSlides : activeSlide - 1"
+                                    class="p-3 ml-2 bg-black/40 hover:bg-black/60 rounded-full transition-smooth">
+                                    <i class="fas fa-chevron-left text-white"></i>
+                                </button>
+                            </div>
+                            <div class="absolute inset-y-0 right-0 flex items-center">
+                                <button @click="activeSlide = activeSlide === totalSlides ? 1 : activeSlide + 1"
+                                    class="p-3 mr-2 bg-black/40 hover:bg-black/60 rounded-full transition-smooth">
+                                    <i class="fas fa-chevron-right text-white"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content -->
+                    <div class="lg:w-2/5">
+                        <span class="tech-pill mb-4 inline-block"
+                            style="background: rgba(6, 182, 212, 0.15); color: #67e8f9;">INTELIGÊNCIA ARTIFICIAL</span>
+                        <h3 class="text-2xl sm:text-3xl font-bold text-white mb-2">DocMind AI</h3>
+                        <p class="text-cyan-400 font-medium mb-4">Assistente Inteligente de Análise Documental</p>
+                        <p class="text-slate-400 mb-6">
+                            Plataforma web que transforma documentos em insights acionáveis usando <strong
+                                class="text-slate-200">Google Gemini 2.0 Flash</strong>. Permite upload de PDF, DOCX,
+                            TXT, CSV e JSON,
+                            com análise automática de contratos, currículos e propostas. Inclui comparação de múltiplos
+                            documentos,
+                            exportação PDF profissional e sistema de favoritos.
+                        </p>
+
+                        <!-- Metrics -->
+                        <div class="flex flex-wrap gap-3 mb-6">
+                            <span class="text-xs px-3 py-1 bg-cyan-500/10 text-cyan-400 rounded-full">Powered by Gemini
+                                AI</span>
+                            <span class="text-xs px-3 py-1 bg-indigo-500/10 text-indigo-400 rounded-full">Comparação de
+                                Docs</span>
+                            <span class="text-xs px-3 py-1 bg-violet-500/10 text-violet-400 rounded-full">Export PDF
+                                profissional</span>
+                        </div>
+
+                        <!-- Stack -->
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="tech-pill">Next.js</span>
+                            <span class="tech-pill">React</span>
+                            <span class="tech-pill">FastAPI</span>
+                            <span class="tech-pill">Python</span>
+                            <span class="tech-pill">Supabase</span>
+                            <span class="tech-pill">Google Gemini</span>
+                        </div>
+
+                        <!-- Buttons -->
+                        <div class="flex gap-4">
+                            <a href="https://github.com/ghmata/docmind-ai" target="_blank"
+                                class="inline-flex items-center gap-2 px-5 py-2.5 border border-white/20 hover:bg-white/5 text-white font-medium rounded-lg transition-smooth text-sm relative z-10">
+                                <i class="fab fa-github"></i>
+                                GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== CASE 5: Planbel ===== -->
+            <div data-aos="fade-up" class="project-card" x-data="{ activeSlide: 1, totalSlides: 3 }">
+                <div class="flex flex-col lg:flex-row gap-8 items-center">
+                    <!-- Image Carousel -->
+                    <div class="lg:w-3/5 relative section-gradient-violet rounded-2xl p-4">
+                        <div class="aspect-video rounded-xl overflow-hidden border border-cyan-500/20 relative group">
+                            <!-- Slides -->
+                            <img x-show="activeSlide === 1" src="./images/planbel-1.png" alt="Planbel Interface"
+                                class="w-full h-full object-cover project-image transition-smooth" loading="lazy">
+                            <img x-show="activeSlide === 2" src="./images/planbel-2.png" alt="Planbel Formulário"
+                                class="w-full h-full object-cover project-image transition-smooth" loading="lazy">
+                            <img x-show="activeSlide === 3" src="./images/planbel-3.png" alt="Planbel Plano Gerado"
+                                class="w-full h-full object-cover project-image transition-smooth" loading="lazy">
+
+                            <!-- Navigation Arrows -->
+                            <div class="absolute inset-y-0 left-0 flex items-center">
+                                <button @click="activeSlide = activeSlide === 1 ? totalSlides : activeSlide - 1"
+                                    class="p-3 ml-2 bg-black/40 hover:bg-black/60 rounded-full transition-smooth">
+                                    <i class="fas fa-chevron-left text-white"></i>
+                                </button>
+                            </div>
+                            <div class="absolute inset-y-0 right-0 flex items-center">
+                                <button @click="activeSlide = activeSlide === totalSlides ? 1 : activeSlide + 1"
+                                    class="p-3 mr-2 bg-black/40 hover:bg-black/60 rounded-full transition-smooth">
+                                    <i class="fas fa-chevron-right text-white"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content -->
+                    <div class="lg:w-2/5">
+                        <span class="tech-pill mb-4 inline-block"
+                            style="background: rgba(6, 182, 212, 0.15); color: #67e8f9;">INTELIGÊNCIA ARTIFICIAL</span>
+                        <h3 class="text-2xl sm:text-3xl font-bold text-white mb-2">Planbel</h3>
+                        <p class="text-cyan-400 font-medium mb-4">Gerador de Planos de Aula com IA Generativa</p>
+                        <p class="text-slate-400 mb-6">
+                            Plataforma web que usa <strong class="text-slate-200">Gemini AI</strong> para criar planos
+                            de aula
+                            completos e pedagogicamente rigorosos. Com interface dark theme e exportação profissional em
+                            PDF,
+                            economiza horas de planejamento para professores e coordenadores pedagógicos.
+                        </p>
+
+                        <!-- Metrics -->
+                        <div class="flex flex-wrap gap-3 mb-6">
+                            <span class="text-xs px-3 py-1 bg-cyan-500/10 text-cyan-400 rounded-full">Geração em
+                                segundos</span>
+                            <span class="text-xs px-3 py-1 bg-indigo-500/10 text-indigo-400 rounded-full">Gamificação
+                                integrada</span>
+                            <span class="text-xs px-3 py-1 bg-violet-500/10 text-violet-400 rounded-full">Export PDF
+                                profissional</span>
+                        </div>
+
+                        <!-- Stack -->
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="tech-pill">JavaScript</span>
+                            <span class="tech-pill">Gemini AI</span>
+                            <span class="tech-pill">html2pdf</span>
+                            <span class="tech-pill">Tailwind CSS</span>
+                        </div>
+
+                        <!-- Buttons -->
+                        <div class="flex gap-4">
+                            <a href="https://github.com/ghmata/planbel" target="_blank"
+                                class="inline-flex items-center gap-2 px-5 py-2.5 border border-white/20 hover:bg-white/5 text-white font-medium rounded-lg transition-smooth text-sm relative z-10">
+                                <i class="fab fa-github"></i>
+                                GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== STACK & CERTIFICADOS ==================== -->
+    <section id="stack" class="py-24 bg-bg-secondary">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Header -->
+            <div class="text-center mb-16">
+                <h2 data-aos="fade-up" class="text-3xl sm:text-4xl font-bold text-white mb-4">Tecnologias & Formação
+                </h2>
+                <p data-aos="fade-up" data-aos-delay="100" class="text-lg text-slate-400 max-w-2xl mx-auto">
+                    As ferramentas certas para cada desafio.
+                </p>
+            </div>
+
+            <!-- Stack Grid (Bento-style) -->
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-16">
+                <!-- Backend -->
+                <div data-aos="fade-up" data-aos-delay="0"
+                    class="glass-card p-6 col-span-2 md:col-span-1 lg:col-span-2 hover:border-indigo-500/30 transition-smooth group">
+                    <h3 class="text-sm font-medium text-slate-400 mb-4 uppercase tracking-wider">Backend</h3>
+                    <div class="flex flex-wrap gap-3">
+                        <div class="flex items-center gap-2 text-white">
+                            <i class="fab fa-python text-2xl text-yellow-400"></i>
+                            <span>Python</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-white">
+                            <span class="text-xl">🌶️</span>
+                            <span>Flask</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-white">
+                            <span class="text-xl">⚡</span>
+                            <span>FastAPI</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-white">
+                            <i class="fab fa-node-js text-2xl text-green-400"></i>
+                            <span>Node.js</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Frontend -->
+                <div data-aos="fade-up" data-aos-delay="50"
+                    class="glass-card p-6 col-span-2 md:col-span-2 lg:col-span-3 hover:border-indigo-500/30 transition-smooth group">
+                    <h3 class="text-sm font-medium text-slate-400 mb-4 uppercase tracking-wider">Frontend</h3>
+                    <div class="flex flex-wrap gap-3">
+                        <div class="flex items-center gap-2 text-white">
+                            <i class="fab fa-html5 text-2xl text-orange-500"></i>
+                            <span>HTML5</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-white">
+                            <i class="fab fa-css3-alt text-2xl text-blue-400"></i>
+                            <span>CSS3</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-white">
+                            <i class="fab fa-js text-2xl text-yellow-300"></i>
+                            <span>JavaScript</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-white">
+                            <span class="text-xl">🌊</span>
+                            <span>Tailwind</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-white">
+                            <span class="text-xl">🏔️</span>
+                            <span>Alpine.js</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Banco de Dados -->
+                <div data-aos="fade-up" data-aos-delay="100"
+                    class="glass-card p-6 col-span-1 hover:border-indigo-500/30 transition-smooth group">
+                    <h3 class="text-sm font-medium text-slate-400 mb-4 uppercase tracking-wider">Database</h3>
+                    <div class="flex flex-col gap-2">
+                        <div class="flex items-center gap-2 text-white text-sm">
+                            <span>SQLite</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-white text-sm">
+                            <span>PostgreSQL</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-white text-sm">
+                            <span>SQLAlchemy</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- IA & Dados -->
+                <div data-aos="fade-up" data-aos-delay="150"
+                    class="glass-card p-6 col-span-1 lg:col-span-2 hover:border-violet-500/30 transition-smooth group">
+                    <h3 class="text-sm font-medium text-slate-400 mb-4 uppercase tracking-wider">IA & Dados</h3>
+                    <div class="flex flex-wrap gap-3">
+                        <div class="flex items-center gap-2 text-white text-sm">
+                            <span class="text-lg">🦜</span>
+                            <span>LangChain</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-white text-sm">
+                            <span class="text-lg">🤖</span>
+                            <span>OpenAI API</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-white text-sm">
+                            <span class="text-lg">🐼</span>
+                            <span>Pandas</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DevOps -->
+                <div data-aos="fade-up" data-aos-delay="200"
+                    class="glass-card p-6 col-span-2 hover:border-indigo-500/30 transition-smooth group">
+                    <h3 class="text-sm font-medium text-slate-400 mb-4 uppercase tracking-wider">DevOps & Infra</h3>
+                    <div class="flex flex-wrap gap-4">
+                        <div class="flex items-center gap-2 text-white">
+                            <i class="fab fa-git-alt text-2xl text-orange-500"></i>
+                            <span>Git</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-white">
+                            <i class="fab fa-github text-2xl"></i>
+                            <span>GitHub</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-white">
+                            <i class="fab fa-docker text-2xl text-blue-400"></i>
+                            <span>Docker</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Certificados -->
+            <div class="text-center mb-8">
+                <h3 data-aos="fade-up" class="text-xl font-bold text-white mb-2">Certificações</h3>
+                <p data-aos="fade-up" data-aos-delay="50" class="text-slate-400">Formação contínua e comprovada.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Grupo 1 -->
+                <div data-aos="fade-up" data-aos-delay="0"
+                    class="glass-card p-6 text-center hover:border-indigo-500/30 transition-smooth">
+                    <div class="text-3xl mb-4">🎓</div>
+                    <h4 class="text-white font-semibold mb-2">Engenharia & Fundamentos</h4>
+                    <p class="text-slate-400 text-sm">Engenharia de Software</p>
+                </div>
+
+                <!-- Grupo 2 -->
+                <div data-aos="fade-up" data-aos-delay="100"
+                    class="glass-card p-6 text-center hover:border-indigo-500/30 transition-smooth">
+                    <div class="text-3xl mb-4">💻</div>
+                    <h4 class="text-white font-semibold mb-2">Programação Core</h4>
+                    <p class="text-slate-400 text-sm">Python · JavaScript · SQL</p>
+                </div>
+
+                <!-- Grupo 3 -->
+                <div data-aos="fade-up" data-aos-delay="200"
+                    class="glass-card p-6 text-center hover:border-violet-500/30 transition-smooth">
+                    <div class="text-3xl mb-4">🤖</div>
+                    <h4 class="text-white font-semibold mb-2">IA & Ciência de Dados</h4>
+                    <p class="text-slate-400 text-sm">Machine Learning · LangChain · Data Analysis</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== OUTROS SERVIÇOS ==================== -->
+    <section id="servicos" class="py-24">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Header -->
+            <div class="text-center mb-16">
+                <h2 data-aos="fade-up" class="text-3xl sm:text-4xl font-bold text-white mb-4">Também Posso Ajudar Com...
+                </h2>
+                <p data-aos="fade-up" data-aos-delay="100" class="text-lg text-slate-400 max-w-2xl mx-auto">
+                    Além dos projetos visuais acima, desenvolvo <strong class="text-white">soluções sob medida</strong>
+                    para suas necessidades específicas.
+                </p>
+            </div>
+
+            <!-- Services Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div data-aos="fade-up" data-aos-delay="0"
+                    class="glass-card p-6 hover:border-indigo-500/30 transition-smooth">
+                    <div class="text-4xl mb-4">🤖</div>
+                    <h3 class="text-lg font-bold text-white mb-2">Chatbots Inteligentes</h3>
+                    <p class="text-slate-400 text-sm">Assistentes com IA para atendimento automático 24/7</p>
+                </div>
+
+                <!-- Card 2 -->
+                <div data-aos="fade-up" data-aos-delay="50"
+                    class="glass-card p-6 hover:border-indigo-500/30 transition-smooth">
+                    <div class="text-4xl mb-4">📊</div>
+                    <h3 class="text-lg font-bold text-white mb-2">Dashboards & Analytics</h3>
+                    <p class="text-slate-400 text-sm">Painéis de controle com métricas e gráficos em tempo real</p>
+                </div>
+
+                <!-- Card 3 -->
+                <div data-aos="fade-up" data-aos-delay="100"
+                    class="glass-card p-6 hover:border-indigo-500/30 transition-smooth">
+                    <div class="text-4xl mb-4">📧</div>
+                    <h3 class="text-lg font-bold text-white mb-2">Automação de E-mail</h3>
+                    <p class="text-slate-400 text-sm">Envios programados, campanhas e follow-ups automatizados</p>
+                </div>
+
+                <!-- Card 4 -->
+                <div data-aos="fade-up" data-aos-delay="150"
+                    class="glass-card p-6 hover:border-violet-500/30 transition-smooth">
+                    <div class="text-4xl mb-4">🌐</div>
+                    <h3 class="text-lg font-bold text-white mb-2">Landing Pages</h3>
+                    <p class="text-slate-400 text-sm">Sites de conversão otimizados e responsivos</p>
+                </div>
+
+                <!-- Card 5 -->
+                <div data-aos="fade-up" data-aos-delay="200"
+                    class="glass-card p-6 hover:border-violet-500/30 transition-smooth">
+                    <div class="text-4xl mb-4">📋</div>
+                    <h3 class="text-lg font-bold text-white mb-2">Sistemas CRUD</h3>
+                    <p class="text-slate-400 text-sm">Gestão de dados com interface completa (Create, Read, Update,
+                        Delete)</p>
+                </div>
+
+                <!-- Card 6 -->
+                <div data-aos="fade-up" data-aos-delay="250"
+                    class="glass-card p-6 hover:border-violet-500/30 transition-smooth">
+                    <div class="text-4xl mb-4">📄</div>
+                    <h3 class="text-lg font-bold text-white mb-2">Conversores de Arquivos</h3>
+                    <p class="text-slate-400 text-sm">PDF ↔ Excel, Word, JSON e outros formatos</p>
+                </div>
+
+                <!-- Card 7 -->
+                <div data-aos="fade-up" data-aos-delay="0"
+                    class="glass-card p-6 hover:border-indigo-500/30 transition-smooth">
+                    <div class="text-4xl mb-4">🔗</div>
+                    <h3 class="text-lg font-bold text-white mb-2">Integrações de APIs</h3>
+                    <p class="text-slate-400 text-sm">Conectar sistemas diferentes (WhatsApp, ERPs, CRMs)</p>
+                </div>
+
+                <!-- Card 8 -->
+                <div data-aos="fade-up" data-aos-delay="50"
+                    class="glass-card p-6 hover:border-indigo-500/30 transition-smooth">
+                    <div class="text-4xl mb-4">📈</div>
+                    <h3 class="text-lg font-bold text-white mb-2">Geradores de Relatórios</h3>
+                    <p class="text-slate-400 text-sm">PDFs e planilhas automáticas com dados atualizados</p>
+                </div>
+
+                <!-- Card 9 -->
+                <div data-aos="fade-up" data-aos-delay="100"
+                    class="glass-card p-6 hover:border-emerald-500/30 transition-smooth">
+                    <div class="text-4xl mb-4">⚡</div>
+                    <h3 class="text-lg font-bold text-white mb-2">Scripts de Automação</h3>
+                    <p class="text-slate-400 text-sm">Automatize tarefas repetitivas e economize tempo</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== CONTATO ==================== -->
+    <section id="contato" class="py-24 hero-gradient">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 data-aos="fade-up" class="text-3xl sm:text-4xl font-bold text-white mb-4">Vamos Conversar?</h2>
+            <p data-aos="fade-up" data-aos-delay="100" class="text-lg text-slate-400 mb-2">
+                Tenho <strong class="text-indigo-400">slots limitados</strong> por mês para novos projetos. Entre em
+                contato antes que fechem.
+            </p>
+            <p data-aos="fade-up" data-aos-delay="150" class="text-slate-500 mb-10">
+                Respondo em até 24h. Sem compromisso — apenas uma conversa inicial para entender se posso ajudar.
+            </p>
+
+            <!-- CTA -->
+            <div data-aos="fade-up" data-aos-delay="200" class="mb-10">
+                <a href="https://wa.me/5561983073229?text=Olá%20Gabriel!%20Vi%20seu%20portfólio%20e%20gostaria%20de%20conversar%20sobre%20um%20projeto."
+                    target="_blank"
+                    class="inline-flex items-center gap-3 px-10 py-5 bg-emerald-500 hover:bg-emerald-400 text-white font-bold text-lg rounded-xl transition-smooth whatsapp-pulse">
+                    <i class="fab fa-whatsapp text-2xl"></i>
+                    Chamar no WhatsApp
+                </a>
+            </div>
+
+            <!-- Info -->
+            <div data-aos="fade-up" data-aos-delay="300"
+                class="flex flex-col sm:flex-row items-center justify-center gap-6 text-slate-400">
+                <a href="mailto:gabrielhm00@gmail.com"
+                    class="flex items-center gap-2 hover:text-white transition-smooth">
+                    <i class="fas fa-envelope"></i>
+                    gabrielhm00@gmail.com
+                </a>
+                <span class="hidden sm:block text-slate-600">|</span>
+                <span class="flex items-center gap-2">
+                    <i class="fas fa-phone"></i>
+                    +55 (61) 98307-3229
+                </span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="py-8 border-t border-white/5">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-slate-500 text-sm">
+                © 2025 Gabriel Hipólito. Todos os direitos reservados.
+            </p>
+        </div>
     </footer>
 
-    <!-- WhatsApp Floating Button -->
-    <a href="https://wa.me/5511999999999?text=Olá! Vi seu portfólio e gostaria de conversar." target="_blank"
-        class="fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:shadow-2xl transition-all hover:scale-110 pulse-animation group"
-        style="background-color: #25D366;" aria-label="Fale direto comigo no WhatsApp">
-        <i class="fab fa-whatsapp text-3xl"></i>
-        <span
-            class="absolute right-16 bg-bg-secondary text-text-primary px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none shadow-xl">
-            Fale direto comigo!
-        </span>
+    <!-- ==================== WHATSAPP FLOATING BUTTON ==================== -->
+    <a href="https://wa.me/5561983073229?text=Olá%20Gabriel!%20Vi%20seu%20portfólio%20e%20gostaria%20de%20conversar%20sobre%20um%20projeto."
+        target="_blank"
+        class="fixed bottom-6 right-6 z-50 w-14 h-14 bg-emerald-500 hover:bg-emerald-400 rounded-full flex items-center justify-center shadow-lg whatsapp-pulse transition-smooth"
+        aria-label="Contato WhatsApp">
+        <i class="fab fa-whatsapp text-white text-2xl"></i>
     </a>
 
-    <!-- Script para Animações de Scroll -->
+    <!-- AOS Init -->
     <script>
-        // Intersection Observer para animações de scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        // Observar todos os elementos com animação
-        document.addEventListener('DOMContentLoaded', () => {
-            const animatedElements = document.querySelectorAll('.fade-in-up, .fade-in');
-            animatedElements.forEach(el => observer.observe(el));
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
         });
     </script>
-
 </body>
 
 </html>

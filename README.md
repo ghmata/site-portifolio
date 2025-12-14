@@ -78,10 +78,9 @@ Este portfólio está hospedado gratuitamente através do **GitHub Pages**.
 
 ## 📞 Contato
 
-- 💼 **LinkedIn:** [linkedin.com/in/seu-perfil](https://linkedin.com)
 - 💻 **GitHub:** [github.com/ghmata](https://github.com/ghmata)
-- 📧 **Email:** seu-email@exemplo.com
-- 💬 **WhatsApp:** [Enviar mensagem](https://wa.me/seu-numero)
+- 📧 **Email:** gabrielhm00@gmail.com
+- 💬 **WhatsApp:** [Enviar mensagem](https://wa.me/5561983073229)
 
 ---
 
